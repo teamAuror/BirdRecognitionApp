@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { globalStyles } from '../styles/globalStyles';
+import { globalStyles } from '../styles/globalStyles'; 
+
 
 export default function About(){
     return(
