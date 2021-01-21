@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import Home from './screens/home';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import Navigator from './routes/drawer';
+
 
 const getFonts = () => Font.loadAsync({
   'indie-flower': require('./assets/fonts/IndieFlower-Regular.ttf'),
@@ -27,7 +29,7 @@ export default function App() {
     );
   }else{
     return (
-      <Home />
+      <Navigator />
     );
   }
  
