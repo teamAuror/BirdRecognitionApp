@@ -8,6 +8,6 @@ export const globalStyles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        fontFamily: 'indie-flower',
+        fontFamily: 'pacifico-regular',
     }
 });
