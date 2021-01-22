@@ -1,11 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View, Text, ImageBackground} from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
 
 export default function About(){
     return(
-        <View style={globalStyles.container}>
-            <Text>About Screen</Text>
-        </View>
+        
+        <ImageBackground source={require('../assets/images/about_bg.png')} style={globalStyles.imageContainer}>
+            
+                <Text style={styles.text}>About Screen</Text>
+            
+           
+        </ImageBackground>
     );
 }
+
+const styles = StyleSheet.create({
+    text: {
+        margin: 20,
+    }
+});

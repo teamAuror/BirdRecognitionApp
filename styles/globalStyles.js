@@ -9,5 +9,10 @@ export const globalStyles = StyleSheet.create({
     text: {
         fontSize: 18,
         fontFamily: 'pacifico-regular',
+    },
+    imageContainer: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
     }
 });
