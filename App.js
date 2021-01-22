@@ -12,6 +12,7 @@ const getFonts = () => Font.loadAsync({
   'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
   'pacifico-regular': require('./assets/fonts/Pacifico-Regular.ttf'),
   'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
+  'poppins-bold': require('./assets/fonts/Poppins-Bold.ttf')
 });
     
 

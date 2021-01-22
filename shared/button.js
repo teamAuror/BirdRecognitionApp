@@ -14,13 +14,14 @@ export default function FlatButton({ text, onPress}){
 const styles = StyleSheet.create({
     button: {
         borderRadius: 8,
-        paddingVertical: 14,
-        paddingHorizontal: 10,
+        paddingVertical: 19,
+        paddingHorizontal: 25,
         backgroundColor: '#f01d71',
     },
     buttonText: {
         color: '#fff',
-        fontWeight: 'bold',
+        fontWeight: '200',
+        fontFamily: 'poppins-bold',
         textTransform: 'uppercase',
         fontSize: 16,
         textAlign: 'center',

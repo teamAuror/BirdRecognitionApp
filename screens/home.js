@@ -1,15 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
+import FlatButton from '../shared/button';
 
 export default function Home(){
+    const handler = () =>{
+        console.log('clicked')
+    }
     return(
-        <View style={[styles.container, {transform: [{ translateY: -100 }]}]}>
+        <View style={styles.container}>
             <View style={styles.imageContainer}>
 
             </View>
             
-                <Button title= 'Click Me' style={styles.btn} />
+                <FlatButton text='Find Bird' onPress={handler} />
             
         </View>
     );
@@ -19,7 +23,8 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
+        padding: 20,
 
     },
     imageContainer: {
@@ -27,13 +32,14 @@ const styles = StyleSheet.create({
         height: 300,
         borderWidth: 1,
         borderColor: '#eee',
-        borderRadius: 4,
-        backgroundColor: 'red',
+        borderRadius: 6,
+        backgroundColor: '#fff',
+        shadowOffset: { width: 1, height: 1},
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
         
     },
-    btn: {
-        position: 'absolute',
-        bottom: 100,
-    }
+    
     
 })
