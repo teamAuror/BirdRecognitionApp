@@ -11,7 +11,10 @@ export default function CustomDrawer(props){
                 <Image source={require('../assets/images/logo.png')} style={styles.logo}/>
             </View>
             <ScrollView>
-                <DrawerItems {...props} />
+                <DrawerItems
+                 {...props}
+                 
+                 />
             </ScrollView>
         </SafeAreaView>
         </ImageBackground>

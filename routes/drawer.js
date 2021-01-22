@@ -3,8 +3,16 @@ import { createAppContainer } from 'react-navigation';
 import HomeStack from './homeStack';
 import AboutStack from './aboutStack';
 import CustomDrawer from '../screens/customDrawer';
+import SplashScreen from '../screens/splashScreen';
 
 const RootDrawerNavigator = createDrawerNavigator({
+    Splash: {
+        screen: SplashScreen,
+        navigationOptions: {
+            header: null,
+            drawerLabel: () => null
+        }
+    },
     Home: {
         screen: HomeStack,
     },
@@ -15,7 +23,7 @@ const RootDrawerNavigator = createDrawerNavigator({
     
 },
 {
-    initialRouteName: 'Home',
+    initialRouteName: 'Splash',
     contentComponent: CustomDrawer,
     contentOptions: {
         activeTintColor: '#E72D44',
@@ -24,8 +32,11 @@ const RootDrawerNavigator = createDrawerNavigator({
             fontFamily: 'poppins-regular',
             fontWeight: '200',
             marginLeft: 25,
-        }
-    }
+            
+        },
+        
+    },
+    
 });
 
 export default createAppContainer(RootDrawerNavigator);
