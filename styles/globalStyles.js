@@ -10,7 +10,7 @@ export const globalStyles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'pacifico-regular',
     },
-    imageContainer: {
+    bgImageContainer: {
         width: '100%',
         height: '100%',
         resizeMode: 'cover',

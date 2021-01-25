@@ -5,7 +5,7 @@ import { globalStyles } from '../styles/globalStyles';
 export default function About(){
     return(
         
-        <ImageBackground source={require('../assets/images/about_bg.png')} style={globalStyles.imageContainer}>
+        <ImageBackground source={require('../assets/images/about_bg.png')} style={globalStyles.bgImageContainer}>
             
                 <Text style={styles.text}>About Screen</Text>
             

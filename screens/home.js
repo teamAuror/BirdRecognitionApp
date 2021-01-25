@@ -1,21 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ImageBackground } from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
 import FlatButton from '../shared/button';
 
 export default function Home(){
     const handler = () =>{
-        console.log('clicked')
+        console.log('clicked');
     }
     return(
-        <View style={styles.container}>
-            <View style={styles.imageContainer}>
+        
+            <ImageBackground source={require('../assets/images/home_bg.png')} style={styles.bgImage}>
+                <View style={styles.imageContainer}>
 
-            </View>
-            
+                </View>
                 <FlatButton text='Find Bird' onPress={handler} />
-            
-        </View>
+            </ImageBackground>
+        
     );
 }
 
@@ -40,6 +40,15 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         
     },
+    bgImage: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        //padding: 20,
+        resizeMode: 'cover',
+        width: '100%',
+        height: '100%',
+    }
     
     
 })
