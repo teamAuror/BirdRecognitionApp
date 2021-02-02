@@ -12,7 +12,8 @@ export default function CustomDrawer(props){
             </View>
             <ScrollView>
                 <DrawerItems
-                 {...props}
+                // getting all navigations
+                 {...props} 
                  
                  />
             </ScrollView>

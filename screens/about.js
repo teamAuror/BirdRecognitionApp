@@ -8,6 +8,9 @@ export default function About(){
         <ImageBackground source={require('../assets/images/about_bg.png')} style={globalStyles.bgImageContainer}>
             
                 <Text style={styles.text}>About Screen</Text>
+                {/* need to add description about our project with proper credits */}
+
+                {/* Creating the carousel of Team members */}
             
            
         </ImageBackground>

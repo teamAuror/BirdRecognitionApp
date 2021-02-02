@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
+// custom button for Application
 export default function FlatButton({ text, onPress}){
     return(
         <TouchableOpacity onPress={onPress}>

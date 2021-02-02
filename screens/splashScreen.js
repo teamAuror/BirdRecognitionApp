@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default function SplashScreen({ navigation }){
 
-
+   // life cycle method for navigate to Home page after 5 seconds
     useEffect(() => {
        setTimeout(() =>{
            navigation.navigate('Home');
@@ -13,6 +13,7 @@ export default function SplashScreen({ navigation }){
     
     return(
         <View style={styles.container}>
+          {/* logo */}
           <View style={styles.imageView}>
             <Image 
             source={require('../assets/images/logo.png')}
@@ -22,6 +23,7 @@ export default function SplashScreen({ navigation }){
             
             />
           </View>
+          {/* text */}
           <View style={styles.textView}>
             <Text style={styles.text}>Team Aurora</Text>
           </View>

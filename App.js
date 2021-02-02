@@ -6,7 +6,7 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Navigator from './routes/drawer';
 
-
+// loding custom fonts for project
 const getFonts = () => Font.loadAsync({
   'indie-flower': require('./assets/fonts/IndieFlower-Regular.ttf'),
   'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
@@ -22,6 +22,9 @@ export default function App() {
   
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  // if fonts not loaded then startAsync method for call the getFonts
+  // after the loading fonts, setFontsLoaded to true
+  // if error occured, show the error
   if(!fontsLoaded){
     return(
       <AppLoading     
@@ -32,6 +35,7 @@ export default function App() {
     );
   }else{
     return (
+      // if fontsLoaded then to Navigator
       <Navigator />
     );
   }

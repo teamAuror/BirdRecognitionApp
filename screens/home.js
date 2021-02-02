@@ -4,6 +4,7 @@ import { globalStyles } from '../styles/globalStyles';
 import FlatButton from '../shared/button';
 
 export default function Home(){
+    // just for Test the Find Bird button
     const handler = () =>{
         console.log('clicked');
     }
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         width: 300,
         height: 300,
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: '#000',
         borderRadius: 6,
         borderStyle: 'dashed',
         backgroundColor: 'transparent',

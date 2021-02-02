@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-
+// custom header for Application
 export default function Header({ navigation, title }){
 
     const openMenu = () =>{
