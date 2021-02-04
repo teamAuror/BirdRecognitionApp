@@ -8,10 +8,14 @@ export default function About(){
         <ImageBackground source={require('../assets/images/about_bg.png')} style={globalStyles.bgImageContainer}>
             
             <View>
-      <Text style={styles.aboutTxt}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-          when an unknown printer took a galley of type and scrambled it to make a type
-           specimen book.</Text>
+      <Text style={styles.aboutTxt}>Designed for beginning and intermediate bird watchers,
+       BirdO is a new kind of bird ID tool created for the
+        University of Westminster BSc. CS/ BEng. SE second year group project by “Team Aurora”. 
+      When you upload an image of an unrecognized bird to BirdO, it taps into hundreds of records
+       within our database to find out what bird it is that you most likely encountered in the vicinity
+        of where you saw the bird. BirdO will also provide you with factual information about the bird
+         you just encountered which are collected from reliable and recognized information points
+          on the internet.</Text>
       <SafeAreaView style={styles.scrollcontainer}>
         <ScrollView 
         horizontal={true}
@@ -89,7 +93,7 @@ const styles = StyleSheet.create({
       },
       aboutTxt:{
         margin: 30,
-        fontSize: 18,
+        fontSize: 14,
         fontFamily: 'nunito-regular',
       },
       txtName:{
