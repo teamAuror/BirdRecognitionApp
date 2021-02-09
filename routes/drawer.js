@@ -4,6 +4,7 @@ import HomeStack from './homeStack';
 import AboutStack from './aboutStack';
 import CustomDrawer from '../screens/customDrawer';
 import SplashScreen from '../screens/splashScreen';
+import SearchStack from './searchStack';
 
 const RootDrawerNavigator = createDrawerNavigator({
     Splash: {
@@ -19,6 +20,9 @@ const RootDrawerNavigator = createDrawerNavigator({
     About: {
         screen: AboutStack,
     },
+    Search: {
+        screen: SearchStack,
+    }
     
     
 },
