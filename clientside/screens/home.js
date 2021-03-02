@@ -5,7 +5,7 @@ import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import base64 from 'react-native-base64';
+//import base64 from 'react-native-base64';
 
 
 let deviceHeight = Dimensions.get('window').height;
