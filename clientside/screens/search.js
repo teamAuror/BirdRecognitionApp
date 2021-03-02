@@ -23,5 +23,7 @@ const styles = StyleSheet.create({
     },
     txt: {
         padding: 10,
+        fontSize: 18,
+        Color: #ff0,
     }
 })
