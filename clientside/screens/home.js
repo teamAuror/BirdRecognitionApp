@@ -70,6 +70,8 @@ export default function Home(){
 
      }
 
+     /* creating the method for send the image uri as base64 */
+
     
     return(
             
