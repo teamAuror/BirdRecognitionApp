@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, send_from_directory
 
 app = Flask(__name__)
 
+
 # take the current working directory.
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
