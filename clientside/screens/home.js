@@ -5,6 +5,7 @@ import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+//import base64 from 'react-native-base64';
 
 
 let deviceHeight = Dimensions.get('window').height;
@@ -44,11 +45,13 @@ export default function Home(){
           allowsEditing: true, // allows to edit ( ex: When user wants to crop image)
           aspect: [4, 3], // image ratio
           quality: 1, // quantity for uploading
+          base64: true, // to convert the image to base64 format
         });
     
         console.log(result);
     
         if (!result.cancelled) {
+          uploadImage(result.uri); // sending the image to backend
           setImage(result.uri);
         }
       };
@@ -60,14 +63,34 @@ export default function Home(){
          allowsEditing: false,
          aspect: [4, 3],
          quality: 1,
+         base64: true,
        });
 
        console.log(result);
     
         if (!result.cancelled) {
+          uploadImage(result.uri);
           setImage(result.uri);
         }
 
+     }
+
+     /* creating the method for send the image uri as base64 */
+     async function uploadImage(str){
+        try{
+          await fetch('http://192.168.8.100:5000/classification',{
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              image: str,
+            }),
+          });
+        }catch(e){
+          console.log(e);
+        }
      }
 
     
