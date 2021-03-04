@@ -15,5 +15,24 @@ bird_categories = ['AFRICAN CROWNED CRANE', 'AFRICAN FIREFINCH', 'ALBATROSS', 'A
 def index():
 	return render_template('main.html')
 
+@app.route("/classification", methods=["POST","GET"])
+def classification():
+    target = os.path.join(current_directory, 'images/')
+    print(target)
+    if not os.path.isdir(target):
+        os.mkdir(target)
+    else:
+        print("couldn't create upload directory: {}".format(target))
+    print("file", request.files.getlist("file"))  # upload multiple files
+    for upload in request.files.getlist("file"):
+        print("upload ",upload)
+        print("{} is the file name".format(upload.filename))
+        filename = upload.filename
+        destination = "/".join([target, filename])
+        print("Accepting income file:", filename)
+        print("Save it to: ", destination)
+        upload.save(destination)
+    return "Folder created."
+
 if __name__ == '__main__':
     app.run(debug=True)

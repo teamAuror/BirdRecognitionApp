@@ -7,7 +7,7 @@
 <body>
     <h1>Birdo</h1>
     <h2>Bird recognition System</h2>
-    <form id="image-upload">
+    <form id="image-form" action="{{ url_for('classification') }}" method="POST" enctype="multipart/form-data">
         <label>Upload your image</label><br>
         <input type="file" accept="image/vnd.sealedmedia.softseal.jpg, image/jpeg, image/png" name="file" multiple><br>
         <input  type="submit">
