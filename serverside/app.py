@@ -64,14 +64,6 @@ def index():
     return render_template('main.html')
 
 
-# this method will capture the image sending by front end
-@app.route("/classification")
-def classification():
-    json_data = request.json
-    value = json_data['image']
-    print(value)
-    return "Test Completed"
-
 
 @app.route("/classification", methods=["POST","GET"])
 def classification():
@@ -93,4 +85,4 @@ def classification():
     return "Folder created."
 
 if __name__ == '__main__':
-    app.run(host='192.168.8.100', debug=True)  # host must be changed to your default ip address
+    app.run(debug=True)  # host must be changed to your default ip address
