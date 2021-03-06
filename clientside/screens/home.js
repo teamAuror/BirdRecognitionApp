@@ -5,7 +5,7 @@ import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-//import base64 from 'react-native-base64';
+import base64 from 'react-native-base64';
 
 
 let deviceHeight = Dimensions.get('window').height;
@@ -21,6 +21,11 @@ export default function Home(){
     const handler = () =>{
         setModalVisible(true); 
     }
+    // Bird Name
+    const[birdName, setBirdName] = useState("Testing..., Nothing from backend");
+
+    // for activityIndicator
+    const[isLoaded, setIsLoaded] = useState(false);
     
     
     
@@ -53,6 +58,7 @@ export default function Home(){
         if (!result.cancelled) {
           uploadImage(result.uri); // sending the image to backend
           setImage(result.uri);
+          getBirdDetails();
         }
       };
 
@@ -71,6 +77,7 @@ export default function Home(){
         if (!result.cancelled) {
           uploadImage(result.uri);
           setImage(result.uri);
+          getBirdDetails();
         }
 
      }
@@ -92,6 +99,21 @@ export default function Home(){
           console.log(e);
         }
      }
+
+
+     // getting bird's informations from backend
+     async function getBirdDetails(){
+       try {
+         let response = await fetch('http://192.168.8.101:5000/home'); // home must be change to current route
+         let responseJSON = await response.json();
+         setPlaceholder(responseJson.name); // name must be change to correct key
+         setIsLoaded(true)
+         console.log(responseJson.name) 
+       } catch (error) {
+         console.log(error);
+       }
+     }
+     
 
     
     return(
@@ -124,7 +146,10 @@ export default function Home(){
                 </Modal>
 
                 <View style={styles.imageContainer}>
-
+                    <Image source={{ uri: result.uri }} style={{ width: 200, height: 200, justifyContent: 'center', alignItems: 'center' }}/>
+                </View>
+                <View style={styles.birdDetailsContainer}>
+                  <Text>Bird: { birdName }</Text>
                 </View>
                 <FlatButton text='Find Bird' onPress={handler} />
             </ImageBackground>
@@ -179,6 +204,12 @@ const styles = StyleSheet.create({
       width: 300,
       height: 300,
       justifyContent: 'space-around',
+      alignItems: 'center',
+    },
+    birdDetailsContainer: {
+      width: '100%',
+      height: 40,
+      justifyContent: 'center',
       alignItems: 'center',
     }
    
