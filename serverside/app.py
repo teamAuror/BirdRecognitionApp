@@ -82,7 +82,14 @@ def classification():
         print("Accepting income file:", filename)
         print("Save it to: ", destination)
         upload.save(destination)
-    return "Folder created."
+        #import libraries
+        import numpy as np
+        from keras.preprocessing import image
+        from keras.models import load_model
+        new_model = load_model('birdo_model.h5') #import the built image classification model
+        new_model.summary() #summary of the created model with all layers
+        print(new_model) # print the summary
+    return "model imported."
 
 if __name__ == '__main__':
     app.run(debug=True)  # host must be changed to your default ip address
