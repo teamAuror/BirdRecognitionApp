@@ -89,7 +89,18 @@ def classification():
         new_model = load_model('birdo_model.h5') #import the built image classification model
         new_model.summary() #summary of the created model with all layers
         print(new_model) # print the summary
-    return "model imported."
+        test_image = image.load_img("images\\" + filename, target_size=(224, 224))
+        test_image = image.img_to_array(test_image)
+        test_image = np.expand_dims(test_image, axis=0)
+        result = new_model.predict(test_image)
+        result1 = result[0]
+        for i in range(250):
+            if result1[i] == 1:
+                break
+
+    prediction = bird_categories[i]
+    return prediction
+
 
 if __name__ == '__main__':
     app.run(debug=True)  # host must be changed to your default ip address
