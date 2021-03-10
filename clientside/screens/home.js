@@ -61,7 +61,8 @@ export default function Home(){
           uploadImage(result.base64); // sending the image to backend
           setImage(result.uri);
           console.log(result.uri);
-          getBirdDetails();
+          //getBirdDetails();
+          setModalVisible(false);
         }
       };
 
@@ -112,9 +113,10 @@ export default function Home(){
        try {
          let response = await fetch('http://192.168.8.101:5000/bird'); // home must be change to current route
          let responseJSON = await response.json();
-         setPlaceholder(responseJson.bird); // name must be change to correct key
+         setBirdName( responseJSON.bird); // name must be change to correct key
          setIsLoaded(true)
-         console.log(responseJson.bird) 
+         console.log( responseJSON.bird) 
+         setIsAnimate(false);
        } catch (error) {
          console.log(error);
        }
