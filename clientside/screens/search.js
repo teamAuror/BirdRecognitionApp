@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, ImageBackground, TextInput } from 'react-native
 
 
 export default function Search(){
+    
     return(
         <ImageBackground source={require('../assets/images/search_bg.jpg')} style={styles.bgImage}>
             <View style={styles.bg}>
