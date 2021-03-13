@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ImageBackground, Modal, Image, StatusBar, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, ImageBackground, Modal, Image, StatusBar, Dimensions, ActivityIndicator } from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
 import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-//import base64 from 'react-native-base64';
+import base64 from 'react-native-base64';
 
 
 let deviceHeight = Dimensions.get('window').height;
@@ -21,6 +21,12 @@ export default function Home(){
     const handler = () =>{
         setModalVisible(true); 
     }
+    // Bird Name
+    const[birdName, setBirdName] = useState("");
+
+    // for activityIndicator
+    const[isLoaded, setIsLoaded] = useState(false);
+    const[isAnimate, setIsAnimate] = useState(false);
     
     
     
@@ -49,10 +55,14 @@ export default function Home(){
         });
     
         console.log(result);
+        setIsAnimate(true);
     
         if (!result.cancelled) {
-          uploadImage(result.uri); // sending the image to backend
+          uploadImage(result.base64); // sending the image to backend
           setImage(result.uri);
+          console.log(result.uri);
+          //getBirdDetails();
+          setModalVisible(false);
         }
       };
 
@@ -66,11 +76,14 @@ export default function Home(){
          base64: true,
        });
 
+       setIsAnimate(true);
        console.log(result);
     
         if (!result.cancelled) {
-          uploadImage(result.uri);
+          uploadImage(result.base64);
           setImage(result.uri);
+          //getBirdDetails();
+          setModalVisible(false);
         }
 
      }
@@ -78,7 +91,7 @@ export default function Home(){
      /* creating the method for send the image uri as base64 */
      async function uploadImage(str){
         try{
-          await fetch('http://192.168.8.100:5000/classification',{
+          await fetch('http://192.168.8.101:5000/classification',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -88,10 +101,27 @@ export default function Home(){
               image: str,
             }),
           });
+          getBirdDetails();
         }catch(e){
           console.log(e);
         }
      }
+
+
+     // getting bird's informations from backend
+     async function getBirdDetails(){
+       try {
+         let response = await fetch('http://192.168.8.101:5000/bird'); // home must be change to current route
+         let responseJSON = await response.json();
+         setBirdName( responseJSON.bird); // name must be change to correct key
+         setIsLoaded(true)
+         console.log( responseJSON.bird) 
+         setIsAnimate(false);
+       } catch (error) {
+         console.log(error);
+       }
+     }
+     
 
     
     return(
@@ -124,7 +154,15 @@ export default function Home(){
                 </Modal>
 
                 <View style={styles.imageContainer}>
-
+                    <Image source={{ uri: image }} style={{ width: 300, height: 300, justifyContent: 'center', alignItems: 'center' }}/>
+                </View>
+                <View style={styles.birdDetailsContainer}>
+                <ActivityIndicator 
+                    size = "large"
+                    color = "#E72D44"
+                    animating = { isAnimate }
+                  />
+                  <Text>Bird: { birdName }</Text>
                 </View>
                 <FlatButton text='Find Bird' onPress={handler} />
             </ImageBackground>
@@ -179,6 +217,12 @@ const styles = StyleSheet.create({
       width: 300,
       height: 300,
       justifyContent: 'space-around',
+      alignItems: 'center',
+    },
+    birdDetailsContainer: {
+      width: '100%',
+      height: 40,
+      justifyContent: 'center',
       alignItems: 'center',
     }
    
