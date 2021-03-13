@@ -114,8 +114,7 @@ def classification():
     global prediction
     prediction = bird_categories[k]
     print(prediction)
-    #return jsonify({"bird": prediction}
-    return null
+    return "", 204
 
 
 @app.route('/bird', methods=["GET"])
