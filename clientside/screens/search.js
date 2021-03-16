@@ -1,11 +1,38 @@
-import React from 'react';
-import { StyleSheet, View, Text, ImageBackground, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, ImageBackground, TextInput, Modal } from 'react-native';
+import FlatButton from '../shared/button';
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 export default function Search(){
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const handler = () =>{
+        setModalVisible(true); 
+    }
     
     return(
+        
         <ImageBackground source={require('../assets/images/search_bg.jpg')} style={styles.bgImage}>
+
+        <Modal
+        visible={modalVisible}
+        presentationStyle = 'pageSheet'
+        animationType = 'slide'>
+            <View style={styles.modal}>
+                    <Ionicons 
+                          name="md-close-circle-sharp"
+                          size={48} 
+                          color="#E72D44"
+                          onPress = { ()=> setModalVisible(false)}
+                          style = { styles.closeIcon}/>
+                <Text>Here the Form to tag location</Text>
+            </View>
+        </Modal>
+
+
+
             <View style={styles.bg}>
                 
                 <View style={styles.inputHolder}>
@@ -15,7 +42,13 @@ export default function Search(){
                     onChangeText={(text) => console.log(text)}/>
                 </View>
                 <View style={styles.listHolder}>
-                <Text style={styles.txt}>Search Screen</Text>
+                <Text style={styles.txt}>Data Will Appear Here</Text>
+                </View>
+                <View style={styles.buttonHolder}>
+                    <FlatButton text="Find Bird Species" onPress={ () => console.log("Pressed!")}/>
+                </View>
+                <View style={styles.location}>
+                    <Text style={styles.tagLocation} onPress={ handler }>Tag Location ?</Text>
                 </View>
             </View>
 
@@ -40,13 +73,14 @@ const styles = StyleSheet.create({
     txtInput: {
         textAlign: 'center',
         width: 240,
-        height: 60,
+        height: 40,
         backgroundColor: '#fff',
-        fontSize: 24,
+        fontSize: 18,
         padding: 10,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 15,
         borderColor: '#757575',
+        backgroundColor: 'rgba(255,255,255,0.8)',
     },
     bg: {
         flex: 1,
@@ -64,5 +98,32 @@ const styles = StyleSheet.create({
         height: '50%',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    buttonHolder: {
+        position: 'absolute',
+        bottom: 15,
+    },
+    location: {
+        position: 'absolute',
+        top: 5,
+        right: -50,
+    },
+    tagLocation: {
+        color: '#E72D44',
+        fontSize: 18,
+        fontFamily: 'indie-flower',
+        textDecorationLine: 'underline',
+        
+    },
+    closeIcon: {
+        position: 'absolute',
+        top: 20,
+        right: 20,
+    },
+    modal : {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
+
 })
