@@ -26,6 +26,9 @@ const RootDrawerNavigator = createDrawerNavigator({
     },
     HelpCenter : {
         screen: HelpStack,
+        navigationOptions: {
+            drawerLabel: () => "Help"
+        }
     }
     
     

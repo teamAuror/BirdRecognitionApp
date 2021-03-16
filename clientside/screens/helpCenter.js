@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Text, ImageBackground , Linking, Button} from 'react-native';
+import { StyleSheet, View, Text, ImageBackground , Linking, Button, ScrollView} from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
 
 export default function helpCenter(){
     return(
         
         <ImageBackground source={require('../assets/images/about_bg.png')} style={globalStyles.bgImageContainer}>
-            <View>
+            <ScrollView>
+            <View style={styles.view}>
             <Text style={styles.qTypeTxt}>General Questions</Text>
                 <Text style={styles.quesTxt}>
                     What is BirdO ?
@@ -68,6 +69,7 @@ export default function helpCenter(){
                 </Text>
 
             </View>
+            </ScrollView>
             
            
         </ImageBackground>
@@ -95,16 +97,22 @@ const styles = StyleSheet.create({
       helpTxt:{
         fontSize: 14,
         fontFamily: 'nunito-regular',
+        marginBottom: 10,
       },
       quesTxt:{
         fontSize: 14,
         fontWeight:'bold',
         fontFamily: 'nunito-regular',
+        marginBottom: 10,
       }
       ,
       qTypeTxt:{
-        fontSize: 16,
+        fontSize: 24,
         fontWeight:'bold',
         fontFamily: 'nunito-regular',
+        marginBottom: 20,
+      },
+      view : {
+          padding: 20,
       }
 });

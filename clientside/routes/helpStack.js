@@ -8,7 +8,7 @@ const screens = {
         screen: HelpCenter,
         navigationOptions: ({ navigation }) => {
             return {
-                headerTitle: () => <Header navigation={navigation} title="Help" />,
+                headerTitle: () => <Header navigation={navigation} title="Help Center" />,
             }
         }
     }
