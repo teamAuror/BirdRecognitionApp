@@ -5,6 +5,7 @@ import AboutStack from './aboutStack';
 import CustomDrawer from '../screens/customDrawer';
 import SplashScreen from '../screens/splashScreen';
 import SearchStack from './searchStack';
+import HelpStack from './helpStack';
 
 const RootDrawerNavigator = createDrawerNavigator({
     Splash: {
@@ -22,6 +23,12 @@ const RootDrawerNavigator = createDrawerNavigator({
     },
     Search: {
         screen: SearchStack,
+    },
+    HelpCenter : {
+        screen: HelpStack,
+        navigationOptions: {
+            drawerLabel: () => "Help"
+        }
     }
     
     
