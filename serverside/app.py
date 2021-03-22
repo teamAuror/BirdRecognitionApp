@@ -2,6 +2,7 @@
 import os
 import base64
 from flask import Flask, request, render_template, send_from_directory, jsonify
+import save_image, image_classification
 
 app = Flask(__name__)
 
@@ -81,38 +82,28 @@ def classification():
     #print('method works')
     json_data = request.json
     value = bytes(json_data['image'], 'utf-8')
-    #print(value)
-    #encoded_user_pass = base64.encodebytes(value)
-    # take the current working directory.
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    target = os.path.join(current_directory, 'images/')
-    # create a images folder, if it is not already created.
-    if not os.path.isdir(target):
-        os.mkdir(target)
-    image_path = os.path.join(target, 'saved_image.jpg')
-    with open(image_path, "wb") as file:
-        file.write(base64.decodebytes(value))
-        print('image saved.')
-    import numpy as np
-    from keras.preprocessing import image
+    save_image.save(value) # process decode and save the image
+    index = image_classification.recognition() #prediction
+    #import numpy as np
+    #from keras.preprocessing import image
     from keras.models import load_model
-    new_model = load_model('birdo_model.h5')
-    new_model.summary()
-    print(new_model)
-    test_image = image.load_img("images\\" + 'saved_image.jpg', target_size=(224, 224))
-    test_image = image.img_to_array(test_image)
-    test_image = np.expand_dims(test_image, axis=0)
-    print("Test Image: ", test_image)
-    result = new_model.predict(test_image)
-    print("Result: ", result)
-    result1 = result[0]
-    print("Result 1: ", result1)
-    for k in range(250):
-        if result1[k] == 1:
-            break
+    #new_model = load_model('birdo_model.h5')
+    #new_model.summary()
+    #print(new_model)
+    #test_image = image.load_img("images\\" + 'saved_image.jpg', target_size=(224, 224))
+    #test_image = image.img_to_array(test_image)
+    #test_image = np.expand_dims(test_image, axis=0)
+    #print("Test Image: ", test_image)
+    #result = new_model.predict(test_image)
+    #print("Result: ", result)
+    #result1 = result[0]
+    #print("Result 1: ", result1)
+    #for k in range(250):
+    #    if result1[k] == 1:
+    #        break
 
     global prediction
-    prediction = bird_categories[k]
+    prediction = bird_categories[index]
     print(prediction)
     #return jsonify({"bird": prediction}
     return null
