@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ImageBackground, Modal, Image, StatusBar, Dimensions, ActivityIndicator } from 'react-native';
-import { globalStyles } from '../styles/globalStyles';
+import { StyleSheet, Text, View, ImageBackground, Modal, Image, StatusBar, Dimensions, ActivityIndicator } from 'react-native';
+// import { globalStyles } from '../styles/globalStyles';
 import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
-import base64 from 'react-native-base64';
+// import * as Permissions from 'expo-permissions';
+// import base64 from 'react-native-base64';
 
 
 let deviceHeight = Dimensions.get('window').height;
@@ -61,7 +61,6 @@ export default function Home(){
           uploadImage(result.base64); // sending the image to backend
           setImage(result.uri);
           console.log(result.uri);
-          //getBirdDetails();
           setModalVisible(false);
         }
       };
@@ -82,7 +81,6 @@ export default function Home(){
         if (!result.cancelled) {
           uploadImage(result.base64);
           setImage(result.uri);
-          //getBirdDetails();
           setModalVisible(false);
         }
 
@@ -147,9 +145,7 @@ export default function Home(){
                             <FlatButton text="Upload Image" onPress={pickImage} ></FlatButton>
                             <FlatButton text="Take Image" onPress={takeImage}  ></FlatButton>
                           </View>
-                          
-                          {/* the image getting from user */}
-                        {/* {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} */}
+                         
                     </View>
                 </Modal>
 

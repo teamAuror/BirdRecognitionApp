@@ -29,8 +29,7 @@ export default function helpCenter(){
                 </Text>
                 <Text style={styles.helpTxt}>
                     You can contact us by,
-                    {/*<Button onPress={()=>Linking.openURL('mailto:support@birdo.net?subject=SendMail&body=Descreption')}
-                     title="support@birdo.net"/>*/}
+                    
                     
                 </Text>
                 <Text style={styles.quesTxt}>
@@ -104,6 +103,8 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontFamily: 'nunito-regular',
         marginBottom: 10,
+        color: '#E72D44',
+        textDecorationLine: 'underline',
       }
       ,
       qTypeTxt:{
@@ -111,6 +112,8 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontFamily: 'nunito-regular',
         marginBottom: 20,
+        color: '#E72D44',
+        textDecorationLine: 'underline',
       },
       view : {
           padding: 20,

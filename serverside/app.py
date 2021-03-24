@@ -1,14 +1,15 @@
 # importing components
 import os
 import base64
-from flask import Flask, request, render_template, send_from_directory, jsonify
+import requests
+from flask import Flask, request, render_template, send_from_directory, jsonify, json
 import save_image, image_classification
 
 app = Flask(__name__)
 
 # get the current directory
 current_directory = os.path.dirname(os.path.abspath(__file__))
-prediction = ""
+prediction = 1
 
 # getting all bird names
 # here just to testing purposes
@@ -103,7 +104,7 @@ def classification():
     #        break
 
     global prediction
-    prediction = bird_categories[index]
+    prediction = index
     print(prediction)
     return "", 204
 
