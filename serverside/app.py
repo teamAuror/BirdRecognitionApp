@@ -4,12 +4,12 @@ import base64
 import requests
 from flask import Flask, request, render_template, send_from_directory, jsonify, json
 import save_image, image_classification
-
+import requests
 app = Flask(__name__)
 
 # get the current directory
 current_directory = os.path.dirname(os.path.abspath(__file__))
-prediction = 1
+prediction_index = 1
 
 # getting all bird names
 # here just to testing purposes
@@ -103,17 +103,26 @@ def classification():
     #    if result1[k] == 1:
     #        break
 
-    global prediction
-    prediction = index
-    print(prediction)
+    global prediction_index
+    prediction_index = index
+    print(index)
     return "", 204
 
 
 @app.route('/bird', methods=["GET"])
 def bird():
-    global prediction
-    print(prediction)
-    return jsonify({"bird": prediction})
+    #ivoke url of the aws dynamodbdatabase
+    url = "https://15c071drx0.execute-api.us-east-2.amazonaws.com/birdov2/birdo_bird_details?birdID="
+    global prediction_index
+    #concatinate url with the key
+    url_with_key = url + str(prediction_index)
+    bird_details = requests.request("GET", url_with_key)
+    bird_details = bird_details.json()
+    return jsonify({
+        "bird": bird_details['body']['birdName'],
+        "birdScName": bird_details['body']['birdSCName'],
+        "location": bird_details['body']['location']
+    })
 
 
 @app.route('/birdDes', methods=["POST"])
