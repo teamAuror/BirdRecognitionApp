@@ -29,7 +29,7 @@ const RootDrawerNavigator = createDrawerNavigator({
     }, 
     About: {
         screen: AboutStack,
-    }
+    },
     
     
 },

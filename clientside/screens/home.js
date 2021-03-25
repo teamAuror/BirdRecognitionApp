@@ -6,33 +6,40 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 // import * as Permissions from 'expo-permissions';
 // import base64 from 'react-native-base64';
+import Avatar from '../assets/images/Avatar1.png';
 
 
 let deviceHeight = Dimensions.get('window').height;
 
 export default function Home(){
+
+    //avatar uri
+    const avatarURI = Image.resolveAssetSource(Avatar).uri;
+
     // state set the modal visible true;
     const [modalVisible, setModalVisible] = useState(false);
 
     // state for set image
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(avatarURI);
 
     // if the Button Pressed then modal visible set to true
     const handler = () =>{
         setModalVisible(true); 
     }
     // Bird Name
-    const[birdName, setBirdName] = useState("");
+    const[birdName, setBirdName] = useState("Bird Name");
 
     //Bird SC Name
-    const[birdSCName, setBirdSCName] = useState("");
+    const[birdSCName, setBirdSCName] = useState("Scientific Name");
 
     // Bird Location
-    const[location, setLocation] = useState("");
+    const[location, setLocation] = useState("Location");
 
     // for activityIndicator
     const[isLoaded, setIsLoaded] = useState(false);
     const[isAnimate, setIsAnimate] = useState(false);
+
+   
 
     
     
@@ -135,8 +142,10 @@ export default function Home(){
     return(
             
             <ImageBackground source={require('../assets/images/home_bg.png')} style={styles.bgImage}>
+
               {/* to show status bar in dark */}
               <StatusBar barStyle="dark-content" /> 
+
               {/* when user click 'Find Bird' this modal will popup for upload and take image*/}
                 <Modal 
                 visible={modalVisible}
@@ -160,17 +169,17 @@ export default function Home(){
                 </Modal>
 
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: image }} style={{ width: 300, height: 300, justifyContent: 'center', alignItems: 'center' }}/>
+                    <Image source={{ uri: image }} style={{ width: 200, height: 150, justifyContent: 'center', alignItems: 'center', marginBottom: 20, borderRadius: 15 }}/>
+                    <Text style={styles.birdName}>{ birdName }</Text>
+                    <Text style={styles.birdSCName}>{ birdSCName } </Text>
+                    <Text style={styles.birdData}> { location }</Text>
                 </View>
-                <View style={styles.birdDetailsContainer}>
+                <View style={styles.indicatorContainer}>
                 <ActivityIndicator 
                     size = "large"
                     color = "#E72D44"
                     animating = { isAnimate }
                   />
-                  <Text style={styles.birdData}>{ birdName }  | { birdSCName } </Text>
-                  {/* <Text style={styles.birdData}></Text>  */}
-                  <Text style={styles.birdData}>{ location }</Text>
                 </View>
                 <FlatButton text='Find Bird' onPress={handler} />
             </ImageBackground>
@@ -187,17 +196,21 @@ const styles = StyleSheet.create({
 
     },
     imageContainer: {
-        width: 300,
-        height: 300,
-        borderWidth: 1,
-        borderColor: '#000',
-        borderRadius: 6,
-        borderStyle: 'dashed',
-        backgroundColor: 'transparent',
-        shadowOffset: { width: 1, height: 1},
-        shadowColor: '#333',
-        shadowOpacity: 0.3,
-        shadowRadius: 2,
+      width: 300,
+      height: 300,
+      backgroundColor: '#fff',
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: "#000",
+      shadowOffset: {
+          width: 0,
+          height: 4,
+      },
+      shadowOpacity: 0.32,
+      shadowRadius: 5.46,
+      elevation: 9,
+      
         
     },
     bgImage: {
@@ -227,26 +240,31 @@ const styles = StyleSheet.create({
       justifyContent: 'space-around',
       alignItems: 'center',
     },
-    birdDetailsContainer: {
-      width: 240,
-      height: 120,
-      //backgroundColor: '#fff',
-        //borderRadius: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 4,
-        // },
-        // shadowOpacity: 0.32,
-        // shadowRadius: 5.46,
-        // elevation: 9,
+    indicatorContainer: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      zIndex: 4,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     birdData : {
-      color: '#000',
-      fontSize: 20,
-      fontFamily: 'nunito-regular',
+      marginTop: 15,
+      color: '#E72D44',
+      fontSize: 18,
+      fontFamily: 'poppins-regular',
+    },
+    birdName: {
+      color: '#E72D44',
+      fontSize: 18,
+      fontFamily: 'poppins-bold',
+    },
+    birdSCName: {
+      color: '#E72D44',
+      fontSize: 18,
+      textDecorationLine: 'underline',
+      fontStyle: 'italic',
+      fontFamily: 'poppins-italic',
     }
    
     
