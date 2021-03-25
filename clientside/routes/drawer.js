@@ -18,9 +18,6 @@ const RootDrawerNavigator = createDrawerNavigator({
     Home: {
         screen: HomeStack,
     },
-    About: {
-        screen: AboutStack,
-    },
     Search: {
         screen: SearchStack,
     },
@@ -29,6 +26,9 @@ const RootDrawerNavigator = createDrawerNavigator({
         navigationOptions: {
             drawerLabel: () => "Help"
         }
+    }, 
+    About: {
+        screen: AboutStack,
     }
     
     

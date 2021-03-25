@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ImageBackground, TextInput, Modal } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TextInput, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 
@@ -11,48 +11,129 @@ export default function Search(){
     const handler = () =>{
         setModalVisible(true); 
     }
+
+    // to take the inputs from TextInputs
+    const[modalBirdName, setModalBirdName] = useState(""); 
+    const[modalLocation, setModalLocation] = useState("");
+    const[birdName, setBirdName] = useState("");
+
+    /* location tag method */
+    async function tagBirdLocation(birdName, birdLocation){
+        // check if the values are not null
+        if(birdName == "" && birdLocation == ""){
+                alert("Both fields are need to be filled!");
+        }else{
+             //send birdName, and location with fetch
+             try{
+                await fetch('http://192.168.8.100:5000/tagLocation', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        birdName: birdName,
+                        birdLocation: birdLocation,
+                    }),
+                });
+
+            }catch(e){
+                console.log(e); // print the error in log
+            }
+        }
+           
+    }
+
+
+    // search method
+    async function searchBird(birdName){
+        if(birdName == ""){
+            alert("Please enter Bird Name");
+        }else{
+            try{
+                await fetch('http://192.168.8.100:5000/birdDes', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        birdName: birdName,
+                    }),
+                });
+            }catch(e){
+                console.log(e);
+            }
+        }
+    }
     
     return(
         
-        <ImageBackground source={require('../assets/images/search_bg.jpg')} style={styles.bgImage}>
+        
+            <ImageBackground source={require('../assets/images/search_bg.jpg')} style={styles.bgImage}>
 
-        <Modal
-        visible={modalVisible}
-        presentationStyle = 'pageSheet'
-        animationType = 'slide'>
-            <View style={styles.modal}>
-                    <Ionicons 
-                          name="md-close-circle-sharp"
-                          size={48} 
-                          color="#E72D44"
-                          onPress = { ()=> setModalVisible(false)}
-                          style = { styles.closeIcon}/>
-                <Text>Here the Form to tag location</Text>
-            </View>
-        </Modal>
+            <Modal
+            visible={modalVisible}
+            presentationStyle = 'pageSheet'
+            animationType = 'slide'>
+                 <TouchableWithoutFeedback onPress={() => {
+                Keyboard.dismiss();
+                console.log("keybord dismissed");
+            }}>
+                <View style={styles.modal}>
+                        <Ionicons 
+                            name="md-close-circle-sharp"
+                            size={48} 
+                            color="#E72D44"
+                            onPress = { ()=> setModalVisible(false)}
+                            style = { styles.closeIcon}/>
+                    {/* <Text>Here the Form to tag location</Text> */}
+                    <View style={styles.formStyle}>
+                        <TextInput 
+                            placeholder = "Enter Bird"
+                            style = {styles.modalInput}
+                            onChangeText ={ (text) => {setModalBirdName(text)} }
+                        />
 
+                        <TextInput 
+                            placeholder = "Enter Location"
+                            style = {styles.modalInput}
+                            onChangeText = { (text) => {setModalLocation(text)} }
+                        />
 
-
-            <View style={styles.bg}>
-                
-                <View style={styles.inputHolder}>
-                    <TextInput 
-                    style={styles.txtInput}
-                    placeholder="Enter Bird Name"
-                    onChangeText={(text) => console.log(text)}/>
+                        <FlatButton text="Tag Location" onPress={ () => tagBirdLocation(modalBirdName, modalLocation)} />
+                    </View>
                 </View>
-                <View style={styles.listHolder}>
-                <Text style={styles.txt}>Data Will Appear Here</Text>
-                </View>
-                <View style={styles.buttonHolder}>
-                    <FlatButton text="Find Bird Species" onPress={ () => console.log("Pressed!")}/>
-                </View>
-                <View style={styles.location}>
-                    <Text style={styles.tagLocation} onPress={ handler }>Tag Location ?</Text>
-                </View>
-            </View>
+                </TouchableWithoutFeedback>
+            </Modal>
 
-        </ImageBackground>
+
+                <TouchableWithoutFeedback onPress={() => {
+                Keyboard.dismiss();
+                console.log("keybord dismissed");
+            }}>
+                <View style={styles.bg}>
+                    
+                    <View style={styles.inputHolder}>
+                        <TextInput 
+                        style={styles.txtInput}
+                        placeholder="Enter Bird Name"
+                        onChangeText={(text) => setBirdName(text)}/>
+                    </View>
+                    <View style={styles.listHolder}>
+                    <Text style={styles.txt}>Data Will Appear Here</Text>
+                    </View>
+                    <View style={styles.buttonHolder}>
+                        <FlatButton text="Find Bird Species" onPress={ () => searchBird(birdName)}/>
+                    </View>
+                    <View style={styles.location}>
+                        <Text style={styles.tagLocation} onPress={ handler }>Tag Location ?</Text>
+                    </View>
+                </View>
+                </TouchableWithoutFeedback>
+
+            </ImageBackground>
+        
         
     );
 }
@@ -124,6 +205,19 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    formStyle: {
+        width: 300,
+        height: 300,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    modalInput: {
+        textAlign: 'center',
+        width: 240,
+        height: 40,
+        backgroundColor: '#fff',
+        padding: 10,
     }
 
 })

@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # get the current directory
 current_directory = os.path.dirname(os.path.abspath(__file__))
-prediction = 1
+prediction_index = 1
 
 # getting all bird names
 # here just to testing purposes
@@ -80,46 +80,67 @@ def index():
 
 @app.route('/classification', methods=["POST", "GET"])
 def classification():
-    #print('method works')
+    # print('method works')
     json_data = request.json
     value = bytes(json_data['image'], 'utf-8')
-    save_image.save(value) # process decode and save the image
-    index = image_classification.recognition() #prediction
-    #import numpy as np
-    #from keras.preprocessing import image
+    save_image.save(value)  # process decode and save the image
+    index = image_classification.recognition()  # prediction
+    # import numpy as np
+    # from keras.preprocessing import image
     from keras.models import load_model
-    #new_model = load_model('birdo_model.h5')
-    #new_model.summary()
-    #print(new_model)
-    #test_image = image.load_img("images\\" + 'saved_image.jpg', target_size=(224, 224))
-    #test_image = image.img_to_array(test_image)
-    #test_image = np.expand_dims(test_image, axis=0)
-    #print("Test Image: ", test_image)
-    #result = new_model.predict(test_image)
-    #print("Result: ", result)
-    #result1 = result[0]
-    #print("Result 1: ", result1)
-    #for k in range(250):
+    # new_model = load_model('birdo_model.h5')
+    # new_model.summary()
+    # print(new_model)
+    # test_image = image.load_img("images\\" + 'saved_image.jpg', target_size=(224, 224))
+    # test_image = image.img_to_array(test_image)
+    # test_image = np.expand_dims(test_image, axis=0)
+    # print("Test Image: ", test_image)
+    # result = new_model.predict(test_image)
+    # print("Result: ", result)
+    # result1 = result[0]
+    # print("Result 1: ", result1)
+    # for k in range(250):
     #    if result1[k] == 1:
     #        break
 
-    global prediction
-    prediction = index
-    print(prediction)
+    global prediction_index
+    prediction_index = index
+    print(index)
     return "", 204
 
 
 @app.route('/bird', methods=["GET"])
 def bird():
-    global prediction
-    print(prediction)
-    return jsonify({"bird": prediction})
+    # ivoke url of the aws dynamodbdatabase
+    url = "https://15c071drx0.execute-api.us-east-2.amazonaws.com/birdov2/birdo_bird_details?birdID="
+    global prediction_index
+    # concatinate url with the key
+    url_with_key = url + str(prediction_index)
+    bird_details = requests.request("GET", url_with_key)
+    bird_details = bird_details.json()
+    # return jsonify({
+    #     "bird": bird_details['body']['birdName'],
+    #     "birdScName": bird_details['body']['birdSCName'],
+    #     "location": bird_details['body']['location']
+    # })
+    return {
+        "bird": bird_details['body']['birdName'],
+        "birdScName": bird_details['body']['birdScName'],
+        "location": bird_details['body']['location']
+    }
 
 
 @app.route('/birdDes', methods=["POST"])
 def search():
-    return "Search Method"
+    print("Method Works")
+    return "", 204
+
+
+@app.route('/tagLocation', methods=["POST"])
+def tag_location():
+    print("Method Works")
+    return "", 204
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.8.101', debug=True)
+    app.run(host='192.168.8.100', debug=True)

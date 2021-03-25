@@ -24,9 +24,17 @@ export default function Home(){
     // Bird Name
     const[birdName, setBirdName] = useState("");
 
+    //Bird SC Name
+    const[birdSCName, setBirdSCName] = useState("");
+
+    // Bird Location
+    const[location, setLocation] = useState("");
+
     // for activityIndicator
     const[isLoaded, setIsLoaded] = useState(false);
     const[isAnimate, setIsAnimate] = useState(false);
+
+    
     
     
     
@@ -89,7 +97,7 @@ export default function Home(){
      /* creating the method for send the image uri as base64 */
      async function uploadImage(str){
         try{
-          await fetch('http://192.168.8.101:5000/classification',{
+          await fetch('http://192.168.8.100:5000/classification',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -109,9 +117,11 @@ export default function Home(){
      // getting bird's informations from backend
      async function getBirdDetails(){
        try {
-         let response = await fetch('http://192.168.8.101:5000/bird'); // home must be change to current route
+         let response = await fetch('http://192.168.8.100:5000/bird'); // home must be change to current route
          let responseJSON = await response.json();
          setBirdName( responseJSON.bird); // name must be change to correct key
+         setBirdSCName(responseJSON.birdScName);
+         setLocation(responseJSON.location);
          setIsLoaded(true)
          console.log( responseJSON.bird) 
          setIsAnimate(false);
@@ -158,7 +168,9 @@ export default function Home(){
                     color = "#E72D44"
                     animating = { isAnimate }
                   />
-                  <Text>Bird: { birdName }</Text>
+                  <Text style={styles.birdData}>{ birdName }  | { birdSCName } </Text>
+                  {/* <Text style={styles.birdData}></Text>  */}
+                  <Text style={styles.birdData}>{ location }</Text>
                 </View>
                 <FlatButton text='Find Bird' onPress={handler} />
             </ImageBackground>
@@ -216,10 +228,25 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     birdDetailsContainer: {
-      width: '100%',
-      height: 40,
-      justifyContent: 'center',
-      alignItems: 'center',
+      width: 240,
+      height: 120,
+      //backgroundColor: '#fff',
+        //borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 4,
+        // },
+        // shadowOpacity: 0.32,
+        // shadowRadius: 5.46,
+        // elevation: 9,
+    },
+    birdData : {
+      color: '#000',
+      fontSize: 20,
+      fontFamily: 'nunito-regular',
     }
    
     
