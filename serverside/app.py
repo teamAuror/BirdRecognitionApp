@@ -114,17 +114,24 @@ def bird():
 @app.route('/birdDes', methods=["POST"])
 def search():
     json_data = request.json
-    bird_name = json_data['birdName']
-    url = "https://twm47yfmxg.execute-api.us-east-2.amazonaws.com/birdoSearch/birdo_bird_details?birdName=
-    # concatinate url with the birdName
-    url_with_bird = url + bird_name
-    bird_details = requests.request("GET", url_with_bird)
-    bird_details = bird_details.json()
-    return jsonify({
-        "bird": bird_details['body']['birdName'],
-        "birdScName": bird_details['body']['birdScName'],
-        "location": bird_details['body']['location']
-    })
+    bird_name = json_data['birdName'].upper()
+    try:
+       url = "https://twm47yfmxg.execute-api.us-east-2.amazonaws.com/birdoSearch/birdo_bird_details?birdName="
+       # concatinate url with the birdName
+       url_with_bird = url + bird_name
+       bird_details = requests.request("GET", url_with_bird)
+       bird_details = bird_details.json()
+       print(bird_details["body"][0])
+       return jsonify({
+           "bird": bird_details['body'][0]['birdName'],
+           "birdScName": bird_details['body'][0]['birdScName'],
+           "location": bird_details['body'][0]['location']
+       })
+    except:
+        print("null")
+        return {"bird" : "null"}
+
+
     
 
 
@@ -135,6 +142,13 @@ def tag_location():
     bird_location = json_data['birdLocation']
     url = "https://w7v57l6d77.execute-api.us-east-2.amazonaws.com/birdoUpdate/birdo_bird_details?birdName="
     url_name_location = url+bird_name+"&birdLocation="+bird_location
+    status = requests.request("GET", url_name_location)
+    status = status.json()
+    print(status["statusCode"])
+    if (status["statusCode"] == 200):
+        return {"return": "success"}
+    else:
+        return {"return": "unsuccess"}
     print(bird_name)
     print(bird_location)
     print("Method Works")
