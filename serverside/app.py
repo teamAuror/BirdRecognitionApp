@@ -92,11 +92,11 @@ def classification():
 
 @app.route('/bird', methods=["GET"])
 def bird():
-    # ivoke url of the aws dynamodbdatabase
+    # invoke url of the aws dynamo db database
     url = "https://15c071drx0.execute-api.us-east-2.amazonaws.com/birdov2/birdo_bird_details?birdID="
     global prediction_index
-    # concatinate url with the key
-    url_with_key = url + str(prediction_index)
+    # concatenate url with the key
+    url_with_key = url + str(prediction_index + 1)
     bird_details = requests.request("GET", url_with_key)
     bird_details = bird_details.json()
     return jsonify({
@@ -104,11 +104,7 @@ def bird():
         "birdScName": bird_details['body']['birdScName'],
         "location": bird_details['body']['location']
     })
-    # return {
-    #     "bird": bird_details['body']['birdName'],
-    #     "birdScName": bird_details['body']['birdScName'],
-    #     "location": bird_details['body']['location']
-    # }
+
 
 
 @app.route('/birdDes', methods=["POST"])
