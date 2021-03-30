@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ImageBackground, TextInput, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TextInput, Modal, TouchableWithoutFeedback, Keyboard, Image} from 'react-native';
 import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 
@@ -16,6 +16,9 @@ export default function Search(){
     const[modalBirdName, setModalBirdName] = useState(""); 
     const[modalLocation, setModalLocation] = useState("");
     const[birdName, setBirdName] = useState("");
+    const[bird, setBird] = useState("");
+    const[scientificName, setScientificName] = useState("");
+    const[location, setLocation] = useState("");
 
     /* location tag method */
     async function tagBirdLocation(birdName, birdLocation){
@@ -121,7 +124,11 @@ export default function Search(){
                         onChangeText={(text) => setBirdName(text)}/>
                     </View>
                     <View style={styles.listHolder}>
-                    <Text style={styles.txt}>Data Will Appear Here</Text>
+                    {/* <Text style={styles.txt}>Data Will Appear Here</Text> */}
+                    <Image source={}  style={{width:200, height:150, justifyContent:'center', alignItems:'center', marginBottom:20 , borderRadius:15 }} />  
+                    <Text style={styles.birdData}> { bird } </Text>
+                    <Text style={styles.birdSCName}> { scientificName } </Text>
+                    <Text style={styles.birdData}> { location } </Text>
                     </View>
                     <View style={styles.buttonHolder}>
                         <FlatButton text="Find Bird Species" onPress={ () => searchBird(birdName)}/>
@@ -175,10 +182,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     listHolder: {
-        width: '100%',
-        height: '50%',
+        width: 300,
+        height: 300,
+        backgroundColor: '#fff',
+        borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5.46,
+        elevation: 9,
     },
     buttonHolder: {
         position: 'absolute',
@@ -218,6 +235,19 @@ const styles = StyleSheet.create({
         height: 40,
         backgroundColor: '#fff',
         padding: 10,
+    },
+    birdData:{
+        marginTop: 15,
+        color: '#E72D44',
+        fontSize: 18,
+        fontFamily: 'poppins-regular',
+    },
+    birdSCName:{
+        color: '#E72D44',
+        fontSize: 18,
+        textDecorationLine: 'underline',
+        fontStyle: 'italic',
+        fontFamily: 'poppins-italic',
     }
 
 })
