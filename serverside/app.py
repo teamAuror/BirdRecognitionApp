@@ -134,7 +134,7 @@ def search():
 @app.route('/tagLocation', methods=["POST"])
 def tag_location():
     json_data = request.json
-    bird_name = json_data['birdName']
+    bird_name = json_data['birdName'].upper()
     bird_location = json_data['birdLocation']
     url = "https://w7v57l6d77.execute-api.us-east-2.amazonaws.com/birdoUpdate/birdo_bird_details?birdName="
     url_name_location = url+bird_name+"&birdLocation="+bird_location
