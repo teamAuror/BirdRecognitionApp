@@ -12,6 +12,10 @@ prediction_index = 1
 
 # getting all bird names
 # here just to testing purposes
+birdName = ""
+birdScName = ""
+birdLocation = ""
+success = False
 bird_categories = ['AFRICAN CROWNED CRANE', 'AFRICAN FIREFINCH', 'ALBATROSS', 'ALEXANDRINE PARAKEET',
                    'AMERICAN AVOCET', 'AMERICAN BITTERN', 'AMERICAN COOT', 'AMERICAN GOLDFINCH',
                    'AMERICAN KESTREL', 'AMERICAN PIPIT', 'AMERICAN REDSTART', 'ANHINGA', 'ANNAS HUMMINGBIRD',
@@ -107,7 +111,7 @@ def bird():
 
 
 
-@app.route('/birdDes', methods=["POST"])
+@app.route('/birdDes', methods=["POST", "GET"])
 def search():
     json_data = request.json
     bird_name = json_data['birdName'].upper()
@@ -118,17 +122,27 @@ def search():
        bird_details = requests.request("GET", url_with_bird)
        bird_details = bird_details.json()
        print(bird_details["body"][0])
+       global birdName, birdScName, birdLocation
+       birdName =  bird_details['body'][0]['birdName']
+       birdScName = bird_details['body'][0]['birdScName']
+       birdLocation = bird_details['body'][0]['location']
        return jsonify({
-           "bird": bird_details['body'][0]['birdName'],
-           "birdScName": bird_details['body'][0]['birdScName'],
-           "location": bird_details['body'][0]['location']
-       })
+               "bird": bird_details['body'][0]['birdName'],
+               "birdScName": bird_details['body'][0]['birdScName'],
+               "location": bird_details['body'][0]['location']
+           })
     except:
         print("null")
         return {"bird" : "null"}
 
 
-    
+@app.route('/dataFromDB',methods=["GET"])
+def data_db():
+    return jsonify({
+        "bird": birdName,
+        "birdScName": birdScName,
+        "location": birdLocation
+    })
 
 
 @app.route('/tagLocation', methods=["POST"])
@@ -140,15 +154,23 @@ def tag_location():
     url_name_location = url+bird_name+"&birdLocation="+bird_location
     status = requests.request("GET", url_name_location)
     status = status.json()
+    global success
     print(status["statusCode"])
     if (status["statusCode"] == 200):
+        success = True
         return {"return": "success"}
     else:
+        success = False
         return {"return": "unsuccess"}
     print(bird_name)
     print(bird_location)
     print("Method Works")
     return "", 204
+
+
+@app.route('/locationSuccess', methods=["GET"])
+def success_tag():
+    return {"success": success}
 
 
 if __name__ == '__main__':

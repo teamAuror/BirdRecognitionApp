@@ -173,13 +173,11 @@ export default function Home(){
                     <Text style={styles.birdName}>{ birdName }</Text>
                     <Text style={styles.birdSCName}>{ birdSCName } </Text>
                     <Text style={styles.birdData}> { location }</Text>
-                </View>
-                <View style={styles.indicatorContainer}>
-                <ActivityIndicator 
-                    size = "large"
-                    color = "#E72D44"
-                    animating = { isAnimate }
-                  />
+                    <ActivityIndicator 
+                        size = "large"
+                        color = "#E72D44"
+                        animating = { isAnimate }
+                      />
                 </View>
                 <FlatButton text='Find Bird' onPress={handler} />
             </ImageBackground>
@@ -239,15 +237,6 @@ const styles = StyleSheet.create({
       height: 300,
       justifyContent: 'space-around',
       alignItems: 'center',
-    },
-    indicatorContainer: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     birdData : {
       marginTop: 15,
