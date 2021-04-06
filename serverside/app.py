@@ -113,6 +113,10 @@ def bird():
 
 @app.route('/birdDes', methods=["POST", "GET"])
 def search():
+    global birdName, birdScName, birdLocation
+    birdName = ""
+    birdScName = ""
+    birdLocation = ""
     json_data = request.json
     bird_name = json_data['birdName'].upper()
     try:
@@ -122,7 +126,6 @@ def search():
        bird_details = requests.request("GET", url_with_bird)
        bird_details = bird_details.json()
        print(bird_details["body"][0])
-       global birdName, birdScName, birdLocation
        birdName =  bird_details['body'][0]['birdName']
        birdScName = bird_details['body'][0]['birdScName']
        birdLocation = bird_details['body'][0]['location']
@@ -174,4 +177,4 @@ def success_tag():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.8.100', debug=True)
+    app.run(host='192.168.8.101', debug=True)

@@ -104,7 +104,7 @@ export default function Home(){
      /* creating the method for send the image uri as base64 */
      async function uploadImage(str){
         try{
-          await fetch('http://192.168.8.100:5000/classification',{
+          await fetch('http://192.168.8.101:5000/classification',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -124,7 +124,7 @@ export default function Home(){
      // getting bird's informations from backend
      async function getBirdDetails(){
        try {
-         let response = await fetch('http://192.168.8.100:5000/bird'); // home must be change to current route
+         let response = await fetch('http://192.168.8.101:5000/bird'); // home must be change to current route
          let responseJSON = await response.json();
          setBirdName( responseJSON.bird); // name must be change to correct key
          setBirdSCName(responseJSON.birdScName);

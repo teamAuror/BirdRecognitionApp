@@ -47,7 +47,7 @@ export default function Search(){
              //send birdName, and location with fetch
              setIsAnimate(true);
              try{
-                await fetch('http://192.168.8.100:5000/tagLocation', {
+                await fetch('http://192.168.8.101:5000/tagLocation', {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
@@ -85,7 +85,7 @@ export default function Search(){
         }else{
             setIsAnimate(true); // activating the indicator
             try{
-                await fetch('http://192.168.8.100:5000/birdDes', {
+                await fetch('http://192.168.8.101:5000/birdDes', {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
@@ -112,10 +112,10 @@ export default function Search(){
     //fetch data from the database
     async function getDataFromDatabase(){
         try{
-            let response = await fetch('http://192.168.8.100:5000/dataFromDB');
+            let response = await fetch('http://192.168.8.101:5000/dataFromDB');
             let responseJSON = await response.json();
             console.log( responseJSON); // for debug purposes
-            if(responseJSON.bird === ""){
+            if(responseJSON.bird == ""){
                // alert("No bird Found!");
                 Alert.alert(
                     "Attention!",
@@ -144,7 +144,7 @@ export default function Search(){
 
     async function getSuccess(){
         try{
-            let response = await fetch('http://192.168.8.100:5000/locationSuccess');
+            let response = await fetch('http://192.168.8.101:5000/locationSuccess');
             let responseJSON = await response.json();
             console.log(responseJSON);
 
@@ -163,6 +163,16 @@ export default function Search(){
                 setIsAnimate(false);
             }
             setIsAnimate(false);
+            Alert.alert(
+                "Success!",
+                "Thanks for Your Contribution",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => console.log("OK!")
+                    }
+                ]
+            );
         }catch(e){
             console.log(e);
         }
