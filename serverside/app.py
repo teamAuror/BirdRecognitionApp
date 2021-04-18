@@ -144,7 +144,8 @@ def data_db():
     return jsonify({
         "bird": birdName,
         "birdScName": birdScName,
-        "location": birdLocation
+        "location": birdLocation,
+        "birdImage": "https://birdobird-images.s3.us-east-2.amazonaws.com/"+birdName.lower()+".jpg"
     })
 
 
@@ -177,4 +178,4 @@ def success_tag():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.8.101', debug=True)
+    app.run(host='192.168.8.100', debug=True)

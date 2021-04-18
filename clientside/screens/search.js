@@ -47,7 +47,7 @@ export default function Search(){
              //send birdName, and location with fetch
              setIsAnimate(true);
              try{
-                await fetch('http://192.168.8.101:5000/tagLocation', {
+                await fetch('https://i-freedom-310915.nw.r.appspot.com/tagLocation', {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
@@ -85,7 +85,7 @@ export default function Search(){
         }else{
             setIsAnimate(true); // activating the indicator
             try{
-                await fetch('http://192.168.8.101:5000/birdDes', {
+                await fetch('https://i-freedom-310915.nw.r.appspot.com/birdDes', {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
@@ -112,7 +112,7 @@ export default function Search(){
     //fetch data from the database
     async function getDataFromDatabase(){
         try{
-            let response = await fetch('http://192.168.8.101:5000/dataFromDB');
+            let response = await fetch('https://i-freedom-310915.nw.r.appspot.com/dataFromDB');
             let responseJSON = await response.json();
             console.log( responseJSON); // for debug purposes
             if(responseJSON.bird == ""){
@@ -132,6 +132,7 @@ export default function Search(){
                 setBird(responseJSON.bird);
                 setScientificName(responseJSON.birdScName);
                 setLocation(responseJSON.location);
+                setImage(responseJSON.birdImage); // getting the current image
                 
             }
             setIsAnimate(false); // after loading set to false
@@ -144,7 +145,7 @@ export default function Search(){
 
     async function getSuccess(){
         try{
-            let response = await fetch('http://192.168.8.101:5000/locationSuccess');
+            let response = await fetch('https://i-freedom-310915.nw.r.appspot.com/locationSuccess');
             let responseJSON = await response.json();
             console.log(responseJSON);
 
@@ -260,7 +261,7 @@ export default function Search(){
 
 
                         <View style={styles.listHolder}>
-                            <Image source={{ uri: image }}  style={{width:200, height:150, justifyContent:'center', alignItems:'center', marginBottom:20 , borderRadius:15 }} />  
+                            <Image source={{ uri: image }}  style={{width:112, height:112, justifyContent:'center', alignItems:'center', marginBottom:20 , borderRadius:15 }} />  
                             <Text style={styles.birdData}> { bird } </Text>
                             <Text style={styles.birdSCName}> { scientificName } </Text>
                             <Text style={styles.birdData}> { location } </Text>

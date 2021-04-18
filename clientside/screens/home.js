@@ -69,13 +69,13 @@ export default function Home(){
           base64: true, // to convert the image to base64 format
         });
     
-        console.log(result);
+        //console.log(result);
         setIsAnimate(true);
     
         if (!result.cancelled) {
           uploadImage(result.base64); // sending the image to backend
           setImage(result.uri);
-          console.log(result.uri);
+          //console.log(result.uri);
           setModalVisible(false);
         }
       };
@@ -91,7 +91,7 @@ export default function Home(){
        });
 
        setIsAnimate(true);
-       console.log(result);
+      // console.log(result);
     
         if (!result.cancelled) {
           uploadImage(result.base64);
@@ -104,7 +104,7 @@ export default function Home(){
      /* creating the method for send the image uri as base64 */
      async function uploadImage(str){
         try{
-          await fetch('http://192.168.8.101:5000/classification',{
+          await fetch('https://i-freedom-310915.nw.r.appspot.com/classification',{
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -124,7 +124,7 @@ export default function Home(){
      // getting bird's informations from backend
      async function getBirdDetails(){
        try {
-         let response = await fetch('http://192.168.8.101:5000/bird'); // home must be change to current route
+         let response = await fetch('https://i-freedom-310915.nw.r.appspot.com/bird'); // home must be change to current route
          let responseJSON = await response.json();
          setBirdName( responseJSON.bird); // name must be change to correct key
          setBirdSCName(responseJSON.birdScName);
