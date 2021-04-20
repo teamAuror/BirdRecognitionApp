@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Modal, Image, StatusBar, Dimensions, ActivityIndicator } from 'react-native';
-// import { globalStyles } from '../styles/globalStyles';
+import { StyleSheet, Text, View, ImageBackground, Modal, Image, StatusBar, ActivityIndicator } from 'react-native';
 import FlatButton from '../shared/button';
 import { Ionicons } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
-// import * as Permissions from 'expo-permissions';
-// import base64 from 'react-native-base64';
 import Avatar from '../assets/images/Avatar1.png';
 
-
-let deviceHeight = Dimensions.get('window').height;
 
 export default function Home(){
 
@@ -69,13 +64,13 @@ export default function Home(){
           base64: true, // to convert the image to base64 format
         });
     
-        //console.log(result);
+        
         setIsAnimate(true);
     
         if (!result.cancelled) {
           uploadImage(result.base64); // sending the image to backend
           setImage(result.uri);
-          //console.log(result.uri);
+        
           setModalVisible(false);
         }
       };
@@ -91,7 +86,6 @@ export default function Home(){
        });
 
        setIsAnimate(true);
-      // console.log(result);
     
         if (!result.cancelled) {
           uploadImage(result.base64);
@@ -169,7 +163,7 @@ export default function Home(){
                 </Modal>
 
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: image }} style={{ width: 200, height: 150, justifyContent: 'center', alignItems: 'center', marginBottom: 20, borderRadius: 15 }}/>
+                    <Image source={{ uri: image }} style={{ width: 150, height: 112.5, justifyContent: 'center', alignItems: 'center', marginBottom: 20, borderRadius: 15 }}/>
                     <Text style={styles.birdName}>{ birdName }</Text>
                     <Text style={styles.birdSCName}>{ birdSCName } </Text>
                     <Text style={styles.birdData}> { location }</Text>

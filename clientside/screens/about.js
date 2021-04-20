@@ -6,6 +6,7 @@ export default function About(){
     return(
         
         <ImageBackground source={require('../assets/images/about_bg.png')} style={globalStyles.bgImageContainer}>
+          <ScrollView>
             
             <View>
       <Text style={styles.aboutTxt}>Designed for beginning and intermediate bird watchers,
@@ -53,9 +54,10 @@ export default function About(){
         </ScrollView>
       </SafeAreaView>
     </View>
-            
+    </ScrollView>    
            
         </ImageBackground>
+        
     );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, ImageBackground, TextInput, Modal,
      TouchableWithoutFeedback, Keyboard, Image, ActivityIndicator,
       KeyboardAvoidingView , Alert} from 'react-native';
@@ -32,7 +32,7 @@ export default function Search(){
     async function tagBirdLocation(birdName, birdLocation){
         // check if the values are not null
         if(birdName == "" && birdLocation == ""){
-               // alert("Both fields are need to be filled!");
+               
                 Alert.alert(
                     "Attention!",
                     "Both fields are need to be filled!",
@@ -71,7 +71,7 @@ export default function Search(){
     // search method
     async function searchBird(birdName){
         if(birdName == ""){
-            //alert("Please enter Bird Name");
+            
             Alert.alert(
                 "Attention!",
                 "Please enter Bird Name",
@@ -116,7 +116,7 @@ export default function Search(){
             let responseJSON = await response.json();
             console.log( responseJSON); // for debug purposes
             if(responseJSON.bird == ""){
-               // alert("No bird Found!");
+               
                 Alert.alert(
                     "Attention!",
                     "No bird Found!",
@@ -127,7 +127,7 @@ export default function Search(){
                         }
                     ]
                 );
-                //setIsAnimate(false); // after loading set to false
+                
             }else{
                 setBird(responseJSON.bird);
                 setScientificName(responseJSON.birdScName);
@@ -150,7 +150,7 @@ export default function Search(){
             console.log(responseJSON);
 
             if(responseJSON.success == false){
-                //alert("No bird Found!");
+                
                 Alert.alert(
                     "Attention!",
                     "No bird Found!",
@@ -162,18 +162,20 @@ export default function Search(){
                     ]
                 );
                 setIsAnimate(false);
+            }else{
+                Alert.alert(
+                    "Success!",
+                    "Thanks for Your Contribution",
+                    [
+                        {
+                            text: "OK",
+                            onPress: () => console.log("OK!")
+                        }
+                    ]
+                );
             }
             setIsAnimate(false);
-            Alert.alert(
-                "Success!",
-                "Thanks for Your Contribution",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => console.log("OK!")
-                    }
-                ]
-            );
+            
         }catch(e){
             console.log(e);
         }
@@ -202,7 +204,7 @@ export default function Search(){
                                         color="#E72D44"
                                         onPress = { ()=> setModalVisible(false)}
                                         style = { styles.closeIcon}/>
-                                {/* <Text>Here the Form to tag location</Text> */}
+                                
                                 <View style={styles.formStyle}>
                                     <TextInput 
                                         placeholder = "Enter Bird"
@@ -239,13 +241,6 @@ export default function Search(){
                  
                     <View style={styles.bg}>
 
-                    {/* <View style={styles.indicatorContainer}>
-                            <ActivityIndicator 
-                                size = "large"
-                                color = "#E72D44"
-                                animating = { isAnimate }
-                            />
-                    </View> */}
                     <KeyboardAvoidingView
                         behavior={Platform.OS === "ios" ? "padding" : "height"}
                         keyboardVerticalOffset = "10"

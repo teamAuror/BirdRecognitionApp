@@ -43,8 +43,8 @@ export default function helpCenter(){
                     What are  the system requirements to run the BirdO app ?
                 </Text>
                 <Text style={styles.helpTxt}>
-                    ios:
-                    Android:
+                    ios: IOS 11.0 +
+                    Android: 6.0 Marshmallow
                 </Text>
                 <Text style={styles.quesTxt}>
                     Camera won't focus / stay blurry ?
