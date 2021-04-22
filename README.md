@@ -40,4 +40,4 @@ Contact the devs at teamaurora45@gmail.com for any support or suggestions you mi
 
 
 
-##Team Aurora 2021 All rights reserved
+## Team Aurora 2021 All rights reserved
