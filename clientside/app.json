@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "BirdRecognitionApp",
+    "name": "BirdO",
     "slug": "BirdRecognitionApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/app_icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -25,7 +25,9 @@
         "backgroundColor": "#FFFFFF"
         
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package":"com.teamaurora.birdo",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
