@@ -5,7 +5,7 @@ BirdO is an assistive app which will help you  to instantly identify birds!
 
 Simply take or upload a snap of a bird, and BirdO can help you identify it within a matter of seconds.
 
-<img src="https://github.com/teamAuror/BirdRecognitionApp/blob/master/screenshots/logo-mockup.png">
+<img src="https://github.com/teamAuror/BirdRecognitionApp/blob/master/screenshots/logo-mockup.png" width="400px" height="400px">
 
 
 # Key features
